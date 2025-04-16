@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
 
 const Hero = () => {
+  const [loopNum, setLoopNum] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const toRotate = ["Digital Artist", "Pixel Crafter", "Code Wizard"];
+  const [text, setText] = useState("");
+  const period = 500;
+  useEffect(() => {
+    let ticker = setInterval(() => {
+      tick();
+    }, period);
+    return () => {
+      clearInterval(ticker);
+    };
+  }, [text]);
+  const tick = () => {
+    let i = loopNum % toRotate.length;
+    let fullText = toRotate[i];
+    let updatedText = isDeleting
+      ? fullText.substring(0, text.length - 1)
+      : fullText.substring(0, text.length + 1);
+    setText(updatedText);
+
+    if (!isDeleting && updatedText === fullText) {
+      setIsDeleting(true);
+    } else if (isDeleting && updatedText === "") {
+      setIsDeleting(false);
+      setLoopNum(loopNum + 1);
+    }
+  };
+
   return (
     <section className="relative w-full h-screen mx-auto">
       <div
@@ -14,7 +43,7 @@ const Hero = () => {
         </div>
         <div>
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className="text-[#915eff]">Sonam</span>
+            Hi, I'm <span className="text-[#915eff]">Sonam {text}</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white`}>
             Crafting pixel-perfect websites with
