@@ -47,10 +47,9 @@ const Hero = () => {
             Hi, I'm <span className="text-[#915eff]">Sonam {text}</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white`}>
-            Crafting pixel-perfect websites with
             {/* <br className="block sm:hidden" /> a dash of code and a splash of */}
-            creativity. I turn caffeine and ideas into sleek, interactive web
-            experiences. ☕💻✨
+            Crafting pixel-perfect websites with creativity. I turn caffeine and
+            ideas into sleek, interactive web experiences. ☕💻✨
           </p>
         </div>
       </div>
